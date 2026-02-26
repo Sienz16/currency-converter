@@ -3,6 +3,7 @@
 ## CI/CD Pipeline
 
 GitHub Actions runs on every push and PR:
+
 - **Type Check** — Validates TypeScript
 - **Lint** — Code style checks
 - **Build Test** — Ensures app compiles
@@ -22,6 +23,7 @@ GitHub Actions runs on every push and PR:
 ### Option 2: Manual Docker Build
 
 Build and push to your registry:
+
 ```bash
 # Build
 docker build -t your-registry/currency-converter:latest .
@@ -35,6 +37,7 @@ Then in Dokploy, use "Docker" source type with your image.
 ## Environment Variables
 
 Set in Dokploy if needed:
+
 - `NODE_ENV=production`
 - `PORT=3000`
 

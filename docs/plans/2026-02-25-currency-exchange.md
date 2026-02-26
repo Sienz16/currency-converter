@@ -13,6 +13,7 @@
 ## Task 1: Create Currency Types and Constants
 
 **Files:**
+
 - Create: `src/lib/currency/types.ts`
 
 **Step 1: Write the type definitions**
@@ -60,6 +61,7 @@ git commit -m "feat: add currency types and constants"
 ## Task 2: Create Exchange Rate API Service
 
 **Files:**
+
 - Create: `src/lib/currency/api.ts`
 
 **Step 1: Write the API service**
@@ -132,6 +134,7 @@ git commit -m "feat: add exchange rate API service with caching"
 ## Task 3: Update Global Styles
 
 **Files:**
+
 - Modify: `src/routes/layout.css`
 
 **Step 1: Add fintech styling**
@@ -154,7 +157,13 @@ git commit -m "feat: add exchange rate API service with caching"
 html {
 	background-color: var(--color-bg-primary);
 	color: var(--color-text-primary);
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	font-family:
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		sans-serif;
 }
 
 body {
@@ -206,6 +215,7 @@ git commit -m "feat: add fintech color scheme and base styles"
 ## Task 4: Create Currency Converter Component
 
 **Files:**
+
 - Create: `src/lib/components/CurrencyConverter.svelte`
 
 **Step 1: Write the component**
@@ -252,8 +262,8 @@ git commit -m "feat: add fintech color scheme and base styles"
 		return toRate / fromRate;
 	});
 
-	let fromCurrencyInfo = $derived(CURRENCIES.find(c => c.code === fromCurrency)!);
-	let toCurrencyInfo = $derived(CURRENCIES.find(c => c.code === toCurrency)!);
+	let fromCurrencyInfo = $derived(CURRENCIES.find((c) => c.code === fromCurrency)!);
+	let toCurrencyInfo = $derived(CURRENCIES.find((c) => c.code === toCurrency)!);
 
 	// Fetch rates when fromCurrency changes
 	async function loadRates() {
@@ -287,16 +297,20 @@ git commit -m "feat: add fintech color scheme and base styles"
 	});
 </script>
 
-<div class="w-full max-w-2xl mx-auto">
+<div class="mx-auto w-full max-w-2xl">
 	<!-- Main Converter Card -->
-	<div class="relative overflow-hidden rounded-2xl bg-[var(--color-bg-card)] border border-[var(--color-border)] shadow-2xl">
+	<div
+		class="relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-card)] shadow-2xl"
+	>
 		<!-- Gradient accent line -->
-		<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)]"></div>
+		<div
+			class="absolute top-0 right-0 left-0 h-1 bg-gradient-to-r from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)]"
+		></div>
 
 		<div class="p-6 md:p-8">
 			<!-- Header -->
-			<div class="text-center mb-8">
-				<h1 class="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-2">
+			<div class="mb-8 text-center">
+				<h1 class="mb-2 text-3xl font-bold text-[var(--color-text-primary)] md:text-4xl">
 					Currency Exchange
 				</h1>
 				<p class="text-[var(--color-text-secondary)]">
@@ -306,7 +320,9 @@ git commit -m "feat: add fintech color scheme and base styles"
 
 			<!-- Error Message -->
 			{#if error}
-				<div class="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+				<div
+					class="mb-6 rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400"
+				>
 					{error}
 				</div>
 			{/if}
@@ -315,12 +331,14 @@ git commit -m "feat: add fintech color scheme and base styles"
 			<div class="space-y-4">
 				<!-- From Currency -->
 				<div class="relative">
-					<label class="block text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-wider mb-2">
+					<label
+						class="mb-2 block text-xs font-medium tracking-wider text-[var(--color-text-secondary)] uppercase"
+					>
 						From
 					</label>
 					<div class="flex gap-3">
 						<div class="relative flex-1">
-							<span class="absolute left-4 top-1/2 -translate-y-1/2 text-2xl">
+							<span class="absolute top-1/2 left-4 -translate-y-1/2 text-2xl">
 								{fromCurrencyInfo.flag}
 							</span>
 							<input
@@ -328,14 +346,14 @@ git commit -m "feat: add fintech color scheme and base styles"
 								bind:value={amount}
 								min="0"
 								step="0.01"
-								class="w-full pl-14 pr-4 py-4 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-xl text-xl font-semibold text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-primary)] focus:border-transparent tabular-nums"
+								class="w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)] py-4 pr-4 pl-14 text-xl font-semibold text-[var(--color-text-primary)] tabular-nums placeholder-[var(--color-text-secondary)] focus:border-transparent focus:ring-2 focus:ring-[var(--color-accent-primary)] focus:outline-none"
 								placeholder="0.00"
 							/>
 						</div>
 						<select
 							bind:value={fromCurrency}
 							onchange={loadRates}
-							class="w-28 px-3 py-4 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-xl text-lg font-semibold text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-primary)] cursor-pointer"
+							class="w-28 cursor-pointer rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-3 py-4 text-lg font-semibold text-[var(--color-text-primary)] focus:ring-2 focus:ring-[var(--color-accent-primary)] focus:outline-none"
 						>
 							{#each CURRENCIES as currency}
 								<option value={currency.code}>
@@ -347,11 +365,11 @@ git commit -m "feat: add fintech color scheme and base styles"
 				</div>
 
 				<!-- Swap Button -->
-				<div class="flex justify-center -my-2 relative z-10">
+				<div class="relative z-10 -my-2 flex justify-center">
 					<button
 						onclick={swapCurrencies}
 						disabled={isSwapping}
-						class="p-3 rounded-full bg-gradient-to-r from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+						class="rounded-full bg-gradient-to-r from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] p-3 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
 						aria-label="Swap currencies"
 					>
 						<svg
@@ -374,24 +392,31 @@ git commit -m "feat: add fintech color scheme and base styles"
 
 				<!-- To Currency -->
 				<div class="relative">
-					<label class="block text-xs font-medium text-[var(--color-text-secondary)] uppercase tracking-wider mb-2">
+					<label
+						class="mb-2 block text-xs font-medium tracking-wider text-[var(--color-text-secondary)] uppercase"
+					>
 						To
 					</label>
 					<div class="flex gap-3">
 						<div class="relative flex-1">
-							<span class="absolute left-4 top-1/2 -translate-y-1/2 text-2xl">
+							<span class="absolute top-1/2 left-4 -translate-y-1/2 text-2xl">
 								{toCurrencyInfo.flag}
 							</span>
 							<input
 								type="text"
-								value={loading ? '...' : convertedAmount().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+								value={loading
+									? '...'
+									: convertedAmount().toLocaleString('en-US', {
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2
+										})}
 								readonly
-								class="w-full pl-14 pr-4 py-4 bg-[var(--color-bg-primary)]/50 border border-[var(--color-border)] rounded-xl text-xl font-semibold text-[var(--color-accent-primary)] tabular-nums cursor-default"
+								class="w-full cursor-default rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)]/50 py-4 pr-4 pl-14 text-xl font-semibold text-[var(--color-accent-primary)] tabular-nums"
 							/>
 						</div>
 						<select
 							bind:value={toCurrency}
-							class="w-28 px-3 py-4 bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-xl text-lg font-semibold text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-primary)] cursor-pointer"
+							class="w-28 cursor-pointer rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-3 py-4 text-lg font-semibold text-[var(--color-text-primary)] focus:ring-2 focus:ring-[var(--color-accent-primary)] focus:outline-none"
 						>
 							{#each CURRENCIES as currency}
 								<option value={currency.code}>
@@ -404,13 +429,17 @@ git commit -m "feat: add fintech color scheme and base styles"
 			</div>
 
 			<!-- Rate Info -->
-			<div class="mt-6 p-4 bg-[var(--color-bg-primary)]/50 rounded-xl border border-[var(--color-border)]">
+			<div
+				class="mt-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-primary)]/50 p-4"
+			>
 				<div class="flex items-center justify-between text-sm">
-					<span class="text-[var(--color-text-secondary)]">
-						Current Rate
-					</span>
+					<span class="text-[var(--color-text-secondary)]"> Current Rate </span>
 					<span class="font-medium text-[var(--color-text-primary)] tabular-nums">
-						1 {fromCurrency} = {currentRate().toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })} {toCurrency}
+						1 {fromCurrency} = {currentRate().toLocaleString('en-US', {
+							minimumFractionDigits: 4,
+							maximumFractionDigits: 4
+						})}
+						{toCurrency}
 					</span>
 				</div>
 				{#if lastUpdated}
@@ -423,15 +452,19 @@ git commit -m "feat: add fintech color scheme and base styles"
 	</div>
 
 	<!-- Popular Rates -->
-	<div class="mt-6 rounded-xl bg-[var(--color-bg-card)] border border-[var(--color-border)] p-6">
-		<h2 class="text-lg font-semibold text-[var(--color-text-primary)] mb-4">Popular Exchange Rates</h2>
-		<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+	<div class="mt-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] p-6">
+		<h2 class="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
+			Popular Exchange Rates
+		</h2>
+		<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
 			{#each ['USD', 'EUR', 'SGD', 'GBP', 'JPY', 'AUD'] as code}
-				{@const currency = CURRENCIES.find(c => c.code === code)}
+				{@const currency = CURRENCIES.find((c) => c.code === code)}
 				{@const rate = rates?.rates[code]}
 				{#if rate && currency}
-					<div class="p-3 bg-[var(--color-bg-primary)]/50 rounded-lg border border-[var(--color-border)]">
-						<div class="flex items-center gap-2 mb-1">
+					<div
+						class="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)]/50 p-3"
+					>
+						<div class="mb-1 flex items-center gap-2">
 							<span class="text-lg">{currency.flag}</span>
 							<span class="font-medium text-[var(--color-text-primary)]">{code}</span>
 						</div>
@@ -458,6 +491,7 @@ git commit -m "feat: create currency converter component"
 ## Task 5: Update Main Page
 
 **Files:**
+
 - Modify: `src/routes/+page.svelte`
 
 **Step 1: Replace page content**
@@ -469,16 +503,26 @@ git commit -m "feat: create currency converter component"
 
 <svelte:head>
 	<title>Currency Exchange | MYR to IDR</title>
-	<meta name="description" content="Real-time currency exchange rates. Convert MYR to IDR and more." />
+	<meta
+		name="description"
+		content="Real-time currency exchange rates. Convert MYR to IDR and more."
+	/>
 </svelte:head>
 
-<main class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-	<div class="max-w-7xl mx-auto">
+<main class="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-7xl">
 		<CurrencyConverter />
 
 		<!-- Footer -->
 		<footer class="mt-12 text-center text-sm text-[var(--color-text-secondary)]">
-			<p>Exchange rates provided by <a href="https://frankfurter.app" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-primary)] hover:underline">Frankfurter</a></p>
+			<p>
+				Exchange rates provided by <a
+					href="https://frankfurter.app"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-[var(--color-accent-primary)] hover:underline">Frankfurter</a
+				>
+			</p>
 			<p class="mt-1">Rates are for informational purposes only</p>
 		</footer>
 	</div>
@@ -497,6 +541,7 @@ git commit -m "feat: update main page with currency converter"
 ## Task 6: Test the Application
 
 **Files:**
+
 - Test in browser
 
 **Step 1: Run dev server**
@@ -509,6 +554,7 @@ bun run dev
 Navigate to http://localhost:5173
 
 **Step 3: Verify functionality**
+
 - [ ] Default shows MYR → IDR
 - [ ] Enter amount and see real-time conversion
 - [ ] Swap button reverses currencies
@@ -542,5 +588,6 @@ The currency exchange website is now complete with:
 9. ✅ Responsive design
 
 **Next steps:**
+
 - Run `bun run build` to create production build
 - Run `bun run preview` to test production build locally
